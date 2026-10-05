@@ -1,0 +1,25 @@
+{
+  "name": "attendly",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Attendly - smart attendance. PERN backend: PostgreSQL + Express + Node.js (frontend served from /public).",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "db:init": "node scripts/db-init.js",
+    "db:reset": "node scripts/db-init.js --reset",
+    "add-user": "node scripts/add-user.js",
+    "test": "node test/api.test.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1"
+  }
+}
