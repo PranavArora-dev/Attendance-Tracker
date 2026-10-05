@@ -1,7 +1,6 @@
 /* ---- REAL API: har method ke upar response shape likha hai ---- */
 async function http(method,path,body){
   const r=await fetch(CONFIG.BASE_URL+path,{method,headers:{'Content-Type':'application/json',Authorization:'Bearer '+(state.token||'')},body:body?JSON.stringify(body):undefined});
-  if(r.status===401&&state.token){state.token=state.user=null;loginView();throw new Error('Session expired. Please sign in again.')}
   if(!r.ok){let m='Request failed';try{m=(await r.json()).message||m}catch(e){}throw new Error(m)}
   return r.json();
 }

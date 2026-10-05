@@ -17,7 +17,7 @@ const NAV=[['dashboard','Dashboard','home'],['mark','Mark Attendance','check'],[
 const greet=()=>{const h=new Date().getHours();return h<12?'Good Morning':h<17?'Good Afternoon':'Good Evening'};
 const stat=(i,v,l,c)=>`<div class="card stat"><span class="tile ${c}">${ic(i,22)}</span><div><b>${v}</b><span>${l}</span></div></div>`;
 const crow=(c,i)=>`<div class="crow"><span class="ctile" style="background:${TILE[i%4]}">${ic(TI[i%4],22)}</span><div class="cinfo"><b>${esc(c.subject)}</b><small>${esc(c.name)} • ${esc(c.time)}</small><small>${c.count} Students</small></div><button class="btn sm" data-mark="${c.id}">Mark Attendance</button></div>`;
-const run=fn=>fn().catch(e=>{const m=$('#main');if(m)m.innerHTML=`<div class="card err" role="alert">${esc(e.message)}</div>`});
+const run=fn=>fn().catch(e=>{$('#main').innerHTML=`<div class="card err" role="alert">${esc(e.message)}</div>`});
 function go(v){state.view=v;if(v!=='students')state.q='';shell()}
 function logout(){state.user=state.token=null;loginView()}
 
@@ -26,7 +26,7 @@ function loginView(){
   <div><label for="id">Email or Roll No.</label><input id="id" autocomplete="username" placeholder="Enter your email or roll number"></div>
   <div><label for="pw">Password</label><div class="pw"><input id="pw" type="password" autocomplete="current-password" placeholder="Enter your password"><button type="button" id="eye" aria-label="Show password">${ic('eye',18)}</button></div></div>
   <div class="err" id="err" role="alert"></div><button class="btn" id="go" style="justify-content:center;padding:12px">Sign In</button>
-  <p class="hint">Don't have an account? <a href="#" style="color:var(--blue);font-weight:600;text-decoration:none">Contact Admin</a><br>${CONFIG.USE_MOCK?'Demo: any email = teacher, digits (220101) = student':'Demo: prof@college.edu / teacher123 &middot; 220101 / student123'}</p></div>
+  <p class="hint">Don't have an account? <a href="#" style="color:var(--blue);font-weight:600;text-decoration:none">Contact Admin</a><br>Demo: any email = teacher, digits (220101) = student</p></div>
   <div class="hero"><svg viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="600" height="800" fill="#6e93b8"/><rect y="520" width="600" height="280" fill="#2f4a2f"/><rect x="60" y="250" width="480" height="290" fill="#8d4a3a"/><rect x="60" y="230" width="480" height="30" fill="#5b2f27"/>${Array.from({length:24},(_,i)=>`<rect x="${90+(i%8)*55}" y="${285+Math.floor(i/8)*80}" width="30" height="46" fill="#d9e6f2" opacity=".8"/>`).join('')}<circle cx="40" cy="520" r="70" fill="#1f3a22"/><circle cx="570" cy="520" r="80" fill="#1f3a22"/></svg>
   <h1>Smart Attendance for a Smarter Tomorrow</h1><div>Track. Manage. Analyze.</div><hr></div></div>`;
   const submit=async()=>{$('#err').textContent='';$('#go').disabled=true;
